@@ -2,35 +2,38 @@ import 'dart:convert';
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:http/http.dart' as http;
+import 'package:login_riverpod/api_constants.dart';
 
 class AuthService {
-  Future<String?> auth(String username, String password) async {
-    var headers = {'Content-Type': 'application/json'};
-    var request = http.Request(
-        'POST',
-        Uri.parse(
-            'https://zrquf74pl0.execute-api.ap-southeast-1.amazonaws.com/default/flutter-test/login'));
-    request.body = json.encode({"username": username, "password": password});
-    request.headers.addAll(headers);
+  
+ Future<String> auth(String username, String password) async {
+  var body = {
+    'username': username,
+    'password': password,
+  };
 
-    http.StreamedResponse response = await request.send();
+  var response = await http.post(
+    Uri.parse("$baseUrl/login"),
+    body: jsonEncode(body),
+  );
 
-    if (response.statusCode == 200) {
-      final responseBody = await response.stream.bytesToString();
-      final token = json.decode(responseBody)['token'];
+  if (response.statusCode == 200 || response.statusCode == 201) {
+    var jsonResponse = jsonDecode(response.body);
 
-      return token;
-    } else {
-      print(response.reasonPhrase);
-      return null;
-    }
+    print('jsonResponse: $jsonResponse');
+    return jsonResponse['token'];
+  } else {
+    print('Error: ${response.statusCode}');
+    return 'Failed to authenticate';
   }
+}
+
 
   Future<String> fetchData(String token) async {
     try {
       final response = await http.get(
         Uri.parse(
-            'https://zrquf74pl0.execute-api.ap-southeast-1.amazonaws.com/default/flutter-test/data'),
+            '$baseUrl/data'),
         headers: {
           'Authorization': token,
         },
