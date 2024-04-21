@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../providers/auth_provider.dart';
 
-class LoginScreen extends ConsumerWidget {
+class LoginScreen extends HookConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final TextEditingController usernameController = TextEditingController();
-    final TextEditingController passwordController = TextEditingController();
+    final TextEditingController usernameController = useTextEditingController();
+    final TextEditingController passwordController = useTextEditingController();
+
+    final auth = ref.watch(authProvider);
 
     return Scaffold(
       appBar: AppBar(
@@ -41,7 +45,8 @@ class LoginScreen extends ConsumerWidget {
                     return;
                   }
 
-                  final success = await ref.read(authProvider).login(username, password);
+                  final success = await auth.login(username, password);
+
                   if (success) {
                     Navigator.pushReplacementNamed(context, '/home');
                   } else {
