@@ -6,7 +6,7 @@ import 'package:login_riverpod/api_constants.dart';
 
 class AuthService {
   
- Future<String> auth(String username, String password) async {
+ Future<String?> auth(String username, String password) async {
   var body = {
     'username': username,
     'password': password,
@@ -19,12 +19,11 @@ class AuthService {
 
   if (response.statusCode == 200 || response.statusCode == 201) {
     var jsonResponse = jsonDecode(response.body);
-
-    print('jsonResponse: $jsonResponse');
-    return jsonResponse['token'];
+    print("token: ${jsonResponse['token']}");
+    return jsonResponse['token']; // return the token for fetching data
   } else {
     print('Error: ${response.statusCode}');
-    return 'Failed to authenticate';
+    return null;
   }
 }
 
@@ -52,6 +51,7 @@ class AuthService {
   }
 
   void logout() {
+    // Perform logout operations here
     print('Logged out');
   }
 }

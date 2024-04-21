@@ -13,25 +13,41 @@ class HomeScreen extends ConsumerWidget {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        backgroundColor: Colors.grey[900],
+        actions: [
+          IconButton(
+            onPressed: () {
+              ref.read(authProvider).logout();
+              Navigator.pushReplacementNamed(context, '/');
+            },
+            icon: Icon(Icons.logout, color: Colors.white),
+          ),
+        ],
       ),
+      backgroundColor: Colors.grey[900],
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
             isLoggedIn
-                ? Column(
+                ? Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      Text(username),
-                      Text('You are logged in.'),
-                      SizedBox(height: 20),
-                      ElevatedButton(
-                        onPressed: () {
-                          ref.read(authProvider).logout();
-                          Navigator.pushReplacementNamed(
-                              context, '/'); //go back to login screen
-                        },
-                        child: Text('Logout'),
+                      const Text(
+                        "Welcome ",
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 28.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                      Text(
+                        username.split(' ').last, // Get the last word
+                        style: const TextStyle(
+                          color: Colors.white,
+                          fontSize: 28.0,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ],
                   )

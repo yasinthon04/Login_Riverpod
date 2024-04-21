@@ -21,13 +21,13 @@ class AuthProvider extends ChangeNotifier {
   Future<bool> login(String username, String password) async {
     final authService = ref.read(authServiceProvider);
     final token = await authService.auth(username, password);
-    if (token != null) {
-      _isLoggedIn = true;
-      _token = token;
-      await fetchData();
-      notifyListeners();
-      return true;
-    }
+    if (token != null && token.isNotEmpty) {
+    _isLoggedIn = true;
+    _token = token;
+    await fetchData();
+    notifyListeners();
+    return true;
+  }
     return false;
   }
 
