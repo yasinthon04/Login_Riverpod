@@ -5,16 +5,18 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 import '../providers/auth_provider.dart';
 
 class LoginScreen extends HookConsumerWidget {
+  const LoginScreen({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final TextEditingController usernameController = useTextEditingController();
-    final TextEditingController passwordController = useTextEditingController();
+    final TextEditingController usernameController = useTextEditingController(); // Flutter Hooks
+    final TextEditingController passwordController = useTextEditingController(); // Flutter Hooks
 
-    final auth = ref.watch(authProvider);
+    final auth = ref.watch(authProvider); 
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
       ),
       body: Center(
         child: Padding(
@@ -39,7 +41,7 @@ class LoginScreen extends HookConsumerWidget {
                   final String password = passwordController.text.trim();
 
                   if (username.isEmpty || password.isEmpty) {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: Text('Please fill in all fields.'),
                     ));
                     return;
@@ -47,9 +49,9 @@ class LoginScreen extends HookConsumerWidget {
 
                   final success = await auth.login(username, password);
 
-                  if (success) {
+                  if (success) { // If login is successful, navigate to home screen
                     Navigator.pushReplacementNamed(context, '/home');
-                  } else {
+                  } else { // If login is unsuccessful, show an alert dialog
                     showDialog(
                       context: context,
                       builder: (context) {
