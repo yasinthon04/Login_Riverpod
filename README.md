@@ -12,7 +12,7 @@ This Flutter app demonstrates how to implement authentication and data fetching 
   <tr>
     <td>
       <p align="center"><b>Login Page</b></p>
-      <img src="screenshots/lohin.png" alt="Login Page" width="300"/>
+      <img src="screenshots/login.png" alt="Login Page" width="300"/>
     </td>
     <td>
       <p align="center"><b>Home Page</b></p>
