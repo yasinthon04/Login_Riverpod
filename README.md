@@ -1,16 +1,24 @@
-# login_riverpod
+# Login Riverpod
+Create by : Yasinthon Roekkamyee
 
-A new Flutter project.
 
-## Getting Started
+## Overview
+This Flutter app demonstrates how to implement authentication and data fetching using Riverpod for state management.
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+<table>
+  <tr>
+    <td>
+      <p align="center"><b>Login Page</b></p>
+      <img src="screenshots/lohin.png" alt="Login Page" width="300"/>
+    </td>
+    <td>
+      <p align="center"><b>Home Page</b></p>
+      <img src="screenshots/home.png" alt="Home Page" width="300"/>
+    </td>
+    
+  </tr>
+ 
+</table>
